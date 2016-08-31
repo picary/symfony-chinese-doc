@@ -3,3 +3,33 @@ p{
 	text-indent: 2em;
 	font-size: 14px;
 }
+.padding_10{
+	padding: 10px;
+}
+.border_1{
+	border: 1px solid #ccc;
+}
+div{
+	margin-left: 20px;
+}
+table{
+	margin-top: 10px;
+	margin-left: 20px;
+	border-left: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+}
+td, th{
+	padding:10px;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+.table_title{
+	background: #6ab0de;
+	font-size: 16px;
+	color:white;
+}
+.table_base{
+	background: #e7f2fa;
+	color: black;
+	font-size: 14px;
+}

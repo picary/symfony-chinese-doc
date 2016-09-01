@@ -36,4 +36,6 @@ td, th{
 .block_span{
 	display:block;
 	margin-left:10px;
+	line-height: 25px;
+	font-size: 14px;
 }

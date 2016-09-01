@@ -33,3 +33,7 @@ td, th{
 	color: black;
 	font-size: 14px;
 }
+.block_span{
+	display:block;
+	margin-left:10px;
+}

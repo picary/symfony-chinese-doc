@@ -1,0 +1,82 @@
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<h2>1.3.0 Symfony里的请求和响应</h2>
+<p>
+	Symfony通过两个类允许您通过一种相对比原生PHP更简单的方法实现HTTP请求和响应。Request类是一个简单的面向对象的实现HTTP请求的封装。通过它，你可以在你们的指尖实现所有类型的请求信息：
+</p>
+<div class="border_1 padding_10">
+	use Symfony\Component\HttpFoundation\Request;<br><br>
+	$request = Request::createFromGlobals();<br><br>
+	
+	// 被请求的URL（如：/about）和所有的查询参数<br>
+	$request->getPathInfo();<br><br>
+
+	// 分别获取GET和POST请求参数<br>
+	$request->query->get('foo');<br>
+	$request->request->get('bar', '如果bar不存在时的默认值');<br><br>
+
+	// 获取SERVER变量<br>
+	$request->server->get('HTTP_HOST');<br><br>
+
+	// 获取一个被标记为foo的文件<br>
+	$request->files->get('foo');<br><br>
+
+	// 获取一个COOKIE值<br>
+	$request->cookies->get('PHPSESSIONID');<br><br>
+
+	// 通过标准的小写名称获取HTTP请求头部信息<br>
+	$request->headers->get('host');<br>
+	$request->headers->get('content-type');<br><br>
+
+	$request->getMethod(); //GET，POST，PUT，DELETE，HEAD<br>
+	$request->getLanguages(); //获取客户端所支持语言的数据
+</div>
+<p>
+	另外，Request类在你不需要关注的地方做了大量的工作。比如，isSecure()方法通过检查PHP的三个值可以确定用户是否通过安全链接与服务器通信（如;HTTPS）。
+</p>
+<table class="table_base">
+	<tr>
+		<td class="table_title">
+			请求包和参数属性
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p>
+				如上所述，$_GET和$_POST变量分别通过公共的query和request实现其访问。每一个对象都是拥有像get(),has(),all()等的一个请求包（Parameter Bag）对象。事实上，每一个上面用到的公共属性都可以使用请求包来实现。
+			</p>
+			<p>
+				Request类拥关于应用内部工作所需特殊数据的公共属性。对于Symfony框架来讲，这些属性的值将会通过一些特定的路由来返回，如_controller, id(如果采用了{id})，甚至可以通过_route来实现路由。这些属性的存在将给你提供一个可以准备和存储有关与请求上下文的地方。
+			</p>
+		</td>
+	</tr>
+</table>
+<p>
+	Symfony同时也提供一个Response（响应）类：一个实现PHP响应内容简单表现的PHP封装。这将会使你的应用通过使用一个面向对象的接口来构建你所需要返回给客户端的响应内容。
+</p>
+<div class="border_1 padding_10">
+	use Symfony\Component\HttpFoundation\Response;<br><br>
+
+	$response = new Response();<br><br>
+
+	$response->setContent('&lt;html&gt;&lt;body&gt;&lt;h1&gt;Hello, world!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;');<br>
+	$response->setStatusCode(Response::HTTP_OK);<br>
+	$response->headers->set('Content-Type', 'text/html');<br><br>
+
+	// 打印HTTP头信息后面的内容<br>
+	$response->send();
+</div>
+<p>
+	如果Symfony没有提供更多的东西，你有了一个更方便面的访问请求信息和一个用于创建响应的面向对象的接口。即是你了解了跟多的Symfony强大的特性，要记得的是你应用程序的目标依然是解释一个请求并根据你的应用程序的业务逻辑创建对应的响应。
+</p>
+<table class="table_base">
+	<tr>
+		<td class="table_title">
+			小技巧
+		</td>
+	</tr>
+	<tr>
+		<td>
+			被称为HttpFoundation（Http基础）的Request和Response类是Symfony中一个独立的组件。这个组件在symfondy中可以被完全独立的应用，并且也同时提供了会话（Session）和文件上传的类。
+		</td>
+	</tr>
+</table>

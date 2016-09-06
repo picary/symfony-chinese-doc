@@ -7,5 +7,26 @@
 	<img src="../../Images/1.1.0.1.png" alt="浏览器与服务器交互流程图" title="浏览器与服务器交互流程图 By：www.cloudstroll.com" />
 </p>
 <p>
-	
+	翻译成为HTTP，被发回浏览器的响应看起来是如下的样子：
+</p>
+<div class="border_1 padding_10">
+	HTTP/1.1 200 OK<br>
+	Date: Sat, 02 Apr 2011 21:05:05 GMT<br>
+	Server: lighttpd/1.4.19<br>
+	Content-Type: text/html<br><br>
+
+	&lt;html&gt;
+	<span class="block_span">
+		&lt;!-- ... HTML for xkcd comic ... --&gt;
+	</span>
+	&lt;/html&gt;
+</div>
+<p>
+	HTTP响应包含请求的资源（在本示例中是HTML内容），和其他的关于响应的信息。响应的第一行尤其重要，包含了HTTP响应状态码（本例中的200）。状态码将总体的通信结果返回给客户端。请求是否成功？是否出现错误？不同的状态码的存在显示不同的页面状态，比如成功，发生错误或者需要客户端做什么事情（如跳转到其他的页面）。所有的状态码可以在维基百科上面查到，<a href=“https://en.wikipedia.org/wiki/List_of_HTTP_status_codes” target=“_blank”>《状态码列表》</a>。
+</p>
+<p>
+	就像请求，一个HTTP响应也包含响应头信息。例如，一个重要的HTTP响应头信息是Content-Type。响应的信息主体可以以不同的格式返回如HTML，XML，JSON等，Content-Type头信息用互联网媒体类型（Internet Media Types）如text/html告诉客户端返回的响应是什么样的格式。所有的媒体格式都可以在维基百科上面查到，<a href="http://en.wikipedia.org/wiki/Internet_media_type#List_of_common_media_types" target="_blank">《公共媒体类型》</a>。
+</p>
+<p>
+	其他的头部信息同样也非常重要。例如，特定的头部信息可以用来构建一个强有力的缓存系统。
 </p>

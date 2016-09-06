@@ -1,0 +1,25 @@
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<h2>1.2.0 PHP里的请求和响应</h2>
+<p>
+	那么，通过PHP如何实现“请求”和“响应”的交互呢？事实上，PHP已经将整个过程抽象出来了。
+</p>
+<div class="border_1 padding_10">
+	$uri = $_SERVER['REQUEST_URI'];<br>
+	$foo = $_GET['foo'];<br><br>
+
+	header('Content-Type: text/html');<br>
+	echo 'The URI requested is: '.$uri;<br>
+	echo 'The value of the "foo" parameter is: '.$foo;
+</div>
+<p>
+	听起来比较奇怪的是，这个小的应用程序实际上是从HTTP请求中获取信息并将之用来构建HTTP响应。相对于解析原始的HTTP请求信息，PHP提供了包含所有请求信息的$_SERVER和$_GET全局变量等全局变量。与之相似的，相对于返回HTTP格式的文本响应，你可以通过header()方法来创建响应头信息并且简单的打印出响应消息的内容部分。PHP将会构建真正的HTTP响应并发回给客户端：
+</p>
+<div class="border_1 padding_10">
+	HTTP/1.1 200 OK<br>
+	Date: Sat, 03 Apr 2011 02:14:33 GMT<br>
+	Server: Apache/2.2.17(Unix)<br>
+	Content-Type: text/html<br><br>
+
+	The URI requested is : /testing?foo=symfony<br>
+	The value of the "foo" parameter is: symfony
+</div>

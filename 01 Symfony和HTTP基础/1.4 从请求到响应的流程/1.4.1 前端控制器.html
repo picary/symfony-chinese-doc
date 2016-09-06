@@ -1,0 +1,55 @@
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<h2>1.4.1 前端控制器</h2>
+<p>
+	传统应用程序的各个页面均由其真实的物理文件来构建：
+</p>
+<div class="border_1 padding_10">
+	index.php<br>
+	contact.php<br>
+	blog.php
+</div>
+<p>
+	这样的方法会产生一些问题，不仅限于缺乏灵活性的连接地址（比如你想不打乱你所有的链接的前提下将blog.php修改为news.php），事实上，所有的文件都必须包含的一些核心的文件比如安全、数据库链接等都和网站的视图形式相同。
+</p>
+<p>
+	一个相对比较好的解决方法就是用一个前端控制器（controller）：一个可以处理所有访问你的应用产生的请求信息的简单的PHP文件。如：
+</p>
+<table>
+	<tr>
+		<td>
+			/index.php
+		</td>
+		<td>
+			executes index.php
+		</td>
+	</tr>
+	<tr>
+		<td>
+			/index.php/contact
+		</td>
+		<td>
+			executes index.php
+		</td>
+	</tr>
+	<tr>
+		<td>
+			/index.php/blog
+		</td>
+		<td>
+			executes index.php
+		</td>
+	</tr>
+</table>
+<table class="table_base">
+	<tr>
+		<td>小技巧</td>
+	</tr>
+	<tr>
+		<td>
+			通过使用Apache的mod_rewrite模块（或者其他web服务器的类似功能）可以使链接地址变得更简洁明了就像 / ， /contact 和 /blog 。
+		</td>
+	</tr>
+</table>
+<p>
+	现在所有的请求都会以相同的方式被处理。区别于运行不同的PHP文件来确定连接地址的方式，前端控制器一直在执行，不同的路由连接地址对应应用不同的部分是在应用内部实现。这个解决了用原始地址解决不同问题的情况。几乎所有现代的WEB应用都是这样做的，包括WordPress。
+</p>

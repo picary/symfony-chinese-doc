@@ -1,0 +1,35 @@
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<h2>1.4.4 Action中的Symfony请求</h2>
+<p>
+	这里是讲解一个在Action中的过程，并没有太深入更详细的内容。假设你想要在你的Symfony应用程序中增加一个 /contact 页面。首先，需要在你的路由配置文件中添加一条 /contact 的路由记录。
+</p>
+<div class="border_1 padding_10">
+	# app/config/routing.yml<br>
+	contact:<br>
+	<span class="block_span">
+		path: /contact<br>
+		defaults: { _controller: AppBundle:Main:contact }
+	</span>
+</div>
+<p>
+	当有人访问 /contact 页面的时候，路由匹配和制定的控制器将会执行。当然你也可以在路由那一章了解到，字符串“AppBundle:Main:contact”是一个指向在MainController类中一个叫contactAction方法的简短表达式。
+</p>
+<div class="border_1 padding_10">
+	// src/AppBundle/Controller/MainController.php<br>
+	namespace AppBundle\Controller;<br><br>
+
+	use Symfony\Component\HttpFoundation\Response;<br><br>
+
+	class MainController{
+	<span class="block_span">
+		public function contactAction(){
+		<span class="block_span">
+			return new Response('&lt;h1&gt;Contact us!&lt;/h1&gt;');
+		</span>
+		}
+	</span>
+	}
+</div>
+<p>
+	在这个非常简单的例子里面，控制器只是简单用HTML &lt;h1&gt;Contact us!&lt;/h1&gt; 创建了一个响应对象。在控制器章节中，你可以了解到一个控制器是如何呈现模板并将代码运行的结果（任何你想要输出到HTML中的内容）插入到模板文件中。这样使得控制器从数据库交互，处理表单提交或者是发送电子邮件的繁重工作中释放出来。
+</p>

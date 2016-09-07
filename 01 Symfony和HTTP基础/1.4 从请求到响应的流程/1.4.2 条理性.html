@@ -1,0 +1,31 @@
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<h2>1.4.2 条理性</h2>
+<p>
+	在前端控制器里面，你必须知道哪一段程序需要执行，什么样的内容应该返回。需要明白的是，你需要检查进来的URI，并根据不同的值执行你代码中不同的部分。如果这样代码可能很快就会变的非常丑陋。
+</p>
+<div class="border_1 padding_10">
+	// index.php<br>
+	use Symfony\Component\HttpFoundation\Request;<br>
+	use Symfony\Component\HttpFoundation\Response;<br><br>
+
+	$request = Reqeust::createFromGlobals();<br>
+	$path = $request->getPathInfo(); // 被请求的URI<br><br>
+
+	if(in_array($path, array('', '/'))){<br>
+		<span class="block_span">
+			$response = new Response('Welcome to the homepage.');
+		</span>
+	} elseif ('/contact' === $path) {<br>
+		<span class="block_span">
+			$response = new Response('Contact us.');
+		</span>
+	} else {<br>
+		<span class="block_span">
+			$response = new Response('Page not found.', Response::HTTP_NOT_FOUND);
+		</span>
+	}<br>
+	$response->send();
+</div>
+<p>
+	解决这个问题将会是困难的。幸运的是，设计Symfony的目的就在与此。
+</p>

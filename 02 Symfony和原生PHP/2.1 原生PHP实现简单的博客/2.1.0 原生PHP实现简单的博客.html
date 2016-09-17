@@ -1,0 +1,63 @@
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<h2>2.1.0 原生PHP实现简单的博客</h2>
+<p>
+	在本小节中，你将会使用原生的PHP实现一个博客程序。开始，创建一个能够从数据库中获取数据并显示博客数据的单页。用原生的PHP快速和不纯净的。
+</p>
+<div class="border_1 padding_10">
+	&lt;?php <br>
+	// index.php<br>
+	$link = new PDO("mysql:host=localhost; dbname=blog_db", "myuser", "mypassword");<br><br>
+	$result = $like->query('SELECT id,title FROM post');<br><br>
+	?&gt;<br><br>
+
+	&lt;DOCTYPE html&gt;<br>
+	&lt;html&gt;
+	<span class="block_span">
+		&lt;head&gt;
+		<span class="block_span">
+			&lt;title&gt;List of Posts&lt;/title&gt;
+		</span>
+		&lt;/head&gt;<br>
+		&lt;body&gt;
+		<span class="block_span">
+			&lt;h1&gt;List of Post&lt;h1&gt;<br>
+			&lt;ul&gt;<br>
+			<span class="block_span">
+				&lt;?php while($row = $result -> fetch(PDO::FETCH_ASSOC)): ?&gt;<br>
+				&lt;li&gt;
+				<span class="block_span">
+					&lt;a href="/show.php?id=&lt;php echo $row['id'] ?&gt;" &gt;<br>
+					<span class="block_span">&lt;php echo $row['title'] ?&gt;</span>
+					&lt;/a&gt;
+				</span>
+				&lt;/li&gt;<br>
+				&lt;php endwhile ?&gt;
+			</span>
+			&lt;/ul&gt;
+		</span>
+		&lt;/body&gt;
+	</span>
+	&lt;/html&gt;<br><br>
+
+	&lt;phnp $link = null; ?&gt;
+</div>
+<p>
+	这样的程序写起来很迅速，并且执行起来也很快。但是当你的应用增长到一定程序的时候，程序将变得不可控。下面指出一些需要注意的问题：
+</p>
+<p>
+	<ul>
+		<li><strong>没有错误检查：</strong>例如数据库连接失败讲如何处理？</li>
+		<li><strong>缺乏组织性：</strong>如果应用程序增大到一定程度，这个单文件将变得难以维护。你将在什么地方处理表单提交？怎么校验数据的合法性？在什么地方写发送电子邮件的代码？</li>
+		<li><strong>代码复用困难：</strong>因为所有的代码都在一个文件中，所以没有办法在其他的博客页面重复使用应用程序的任何一个部分的代码。</li>	
+	</ul>
+</p>
+<table class="table_base">
+	<tr>
+		<td class="table_title">小贴士</td>
+	</tr>
+	<tr>
+		<td>
+			一个没有注意的问题是，这里使用的数据库为MySQL。虽然没有提及，Symfony采用了一个称之为Doctrine的数据库抽象类来实现数据库操作。
+		</td>
+	</tr>
+</table>

@@ -1,0 +1,44 @@
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<h2>2.1.1 表现层分离</h2>
+<p>
+	业务逻辑“logic”代码可以从构建HTML表现层代码中分离出来：
+</p>
+<div class="border_1 padding_10">
+	//index.php<br>
+	$link = new PDO("mysql:host=localhost; dbname=blog_db", "myuser", "mypassword");<br><br>
+
+	$result = $link -> query("SELECT id, title FROM post");<br><br>
+
+	$posts = array();<br>
+	while($row = $result -> fetch(PDO::FETCH_ASSOC)){<br>
+		<span class="block_span">$posts[] = $row;</span>
+	}<br><br>
+
+	$link = null;<br><br>
+
+	// 包含进表现层代码<br>
+	$require 'templates/list.php';
+</div>
+<p>
+	HTML代码被存放在一个单独的文件中（templates/list.php），其近似于PHP模板的HTML文件。
+</p>
+<div class="border_1 padding_10">
+	&lt;!DOCTYPE html&gt;<br>
+	&lt;html&gt;<br>
+	&lt;head&gt;
+	<span class="block_span">
+		&lt;title&gt;List of Posts&lt;/title&gt;
+	</span>
+	&lt;/head&gt;<br>
+	&lt;body&gt;
+	<span class="block_span">
+		&lt;h1&gt;List of Posts&lt;/h1&gt;<br>
+		&lt;ul&gt;<br>
+		<span class="block_span">
+			&lt;php foreach($posts as $post): ?&gt;<br>
+			&lt;li&gt;
+			<span class="block_span">
+			</span>
+		</span>
+	</span>
+</div>

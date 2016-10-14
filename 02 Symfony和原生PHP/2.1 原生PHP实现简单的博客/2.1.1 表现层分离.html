@@ -24,21 +24,38 @@
 </p>
 <div class="border_1 padding_10">
 	&lt;!DOCTYPE html&gt;<br>
-	&lt;html&gt;<br>
-	&lt;head&gt;
+	&lt;html&gt;
 	<span class="block_span">
-		&lt;title&gt;List of Posts&lt;/title&gt;
-	</span>
-	&lt;/head&gt;<br>
-	&lt;body&gt;
-	<span class="block_span">
-		&lt;h1&gt;List of Posts&lt;/h1&gt;<br>
-		&lt;ul&gt;<br>
+		&lt;head&gt;
 		<span class="block_span">
-			&lt;php foreach($posts as $post): ?&gt;<br>
-			&lt;li&gt;
-			<span class="block_span">
-			</span>
+			&lt;title&gt;List of Posts&lt;/title&gt;
 		</span>
+		&lt;/head&gt;<br>
+		&lt;body&gt;
+		<span class="block_span">
+			&lt;h1&gt;List of Posts&lt;/h1&gt;<br>
+			&lt;ul&gt;<br>
+			<span class="block_span">
+				&lt;php foreach($posts as $post): ?&gt;<br>
+				&lt;li&gt;
+				<span class="block_span">
+					&lt;a href="read?id=&lt;?php echo $post['id'];?&gt;"&gt;
+					<span class="block_span">
+						&lt;?php echo $post['title']; ?&gt;
+					</span>
+					&lt;/a&gt;
+				</span>
+				&lt;/li&gt;
+			</span>
+			&lt;/ul&gt;
+		</span>
+		&lt;/body&gt;
 	</span>
+	&lt;/html&gt;
 </div>
+<p>
+	按照惯例，包含了所有的应用逻辑的index.php文件被成为“控制器(controller)”。不管你使用什么语言或者什么框架，控制器“controller”都是你比较常听到的一个词汇。控制器是用来处理用户输入和准备响应的地方。
+</p>
+<p>
+	在这数据库种情况下，控制器准备从数据库中准备数据，并且将数据通过模板展现出来。分离出控制器，如果你想要修改你的博客数据的显示方式（例如使用list.json.php来获取JSON格式数据），你可以很方便仅仅通过修改模板文件来实现。
+</p>

@@ -1,1 +1,56 @@
-2.1.2 业务逻辑分离.html
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<h2>2.1.2 业务逻辑分离</h2>
+<p>
+	到目前为止，此应用程序仅仅包含一个页面。但是，如果另外一个页面同样需要用到数据库连接，或者使用相同的博客内容应该会怎么样呢？重新整理一下代码，将核心的动作和应用程序的数据操作方法分离出来放到model.php这个新的文件中：
+</p>
+<div class="border_1 padding_10">
+	//model.php<br>
+	function open_database_connection(){
+		<span class="block_span">
+			$link = new PDO("mysql:host=localhost;dbname=blog_db", "myuser", "mypassword");<br>
+			return $link;
+		</span>
+	}<br><br>
+
+	function close_database_connection($link){
+		<span class="block_span">
+			$link = null;
+		</span>
+	}<br><br>
+
+	function get_all_posts(){
+		<span class="block_span">
+			$link = open_database_connection();<br>
+			$result = $link -> query('SELECT id,title FROM post');<br>
+			$posts = array();<br>
+			while($row = $result -> fetch(POD::FETCH_ASSOC)){<br>
+				<span class="block_span">
+					$posts[] = $row;
+				</span>
+			}<br>
+			close_database_connection($link);<br>
+			return $posts;
+		</span>
+	}
+</div>
+<table class="table_base">
+	<tr>
+		<td class="table_title">小贴士</td>
+	</tr>
+	<tr>
+		<td>
+			一个应用程序的业务逻辑一般被称之为“数据”层，所以用model.php来命名。在一个拥有良好架构的应用程序中，用于表现商业逻辑的代码应该放在model层中（而不应该放在控制器中）。不像在这个例子中，模型（model）一部分（或者没有）是与数据库连接相关的。
+		</td>
+	</tr>
+</table>
+<p>
+	这时，控制器将非常简单：
+</p>
+<div class="padding_10 border_1">
+	$require_once "model.php";<br>
+	$posts = get_all_posts();<br>
+	require "templates/list.php";
+</div>
+<p>
+	现在，控制器的唯一任务就是从应用的数据层获取数据并且调用对应的模板来展示数据。这就是一个非常简单的model-view-controller（MVC）模型。
+</p>
